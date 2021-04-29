@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <ul class="navigation">
+    <li class="navigation-logo">
+      <a routerLink="">Authentication</a>
+    </li>
+    <li class="navigation-auth">
+      <a
+        mat-stroked-button
+        routerLink="/auth"
+        *ngIf="!(isAuthorized$ | async);
+          else logout"
+      >
+        Sign In / Sign Up
+      </a>
+      <ng-template #logout>
+        <a mat-stroked-button (click)="onLogOut()">Logout</a>
+      </ng-template>
+    </li>
+  </ul>
+</mat-toolbar>
+<mat-progress-bar
+  *ngIf="loadingSpinner"
+  mode="indeterminate">
+</mat-progress-bar>

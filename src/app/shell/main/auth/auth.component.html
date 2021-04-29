@@ -1,0 +1,78 @@
+<section>
+  <h1>
+    {{ isLoginMode ? 'Registration' : 'Login'}}
+  </h1>
+  <form
+    class="auth"
+    [formGroup]="userForm"
+    (submit)="sendData()"
+  >
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Ex. pat@example.com"
+        formControlName="email"
+        required
+      >
+      <mat-error *ngIf="!userForm.get('email').valid && isLoginMode">
+        {{userForm.get('email').hasError('emailIsForbidden')
+        ? 'email is already used'
+        : 'email is required'}}
+      </mat-error>
+      <mat-error *ngIf="!userForm.get('email').valid && !isLoginMode">
+        {{userForm.get('email').hasError('wrongEmail')
+        && !userForm.get('email').hasError('required')
+        ? 'wrong email'
+        : 'email is required'
+        }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        required
+      >
+      <mat-error *ngIf="!userForm.get('password').valid && isLoginMode">
+        Password required min 6 symbols
+      </mat-error>
+    </mat-form-field>
+    <div class="auth-buttons">
+      <button
+        [disabled]="isLoading"
+        type="button"
+        mat-raised-button
+        color="warn"
+        class="reset"
+        (click)="userForm.reset()"
+      >
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="submit"
+        [disabled]="!userForm.valid || isLoading"
+      >
+        {{ isLoginMode ? 'Sign Up' : 'Login'}}
+      </button>
+      <button
+        [disabled]="isLoading"
+        mat-raised-button
+        type="button"
+        class="toggle"
+        (click)="onSwitchMode();
+        userForm.reset()"
+      >
+        Switch to
+        {{ isLoginMode ? 'Login' : 'Sign Up'}}
+      </button>
+    </div>
+  </form>
+</section>
+

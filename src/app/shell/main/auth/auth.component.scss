@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .auth {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    &-buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 300px;
+      flex-wrap: wrap;
+
+      .reset, .submit {
+        width: 100%;
+        max-width: 140px;
+      }
+
+      .toggle {
+        width: 100%;
+        max-width: 280px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
